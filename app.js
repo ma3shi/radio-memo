@@ -10,6 +10,15 @@ const github_token = require('./github_token'); //GitHubへの登録時に作っ
 var session = require('express-session'); //認証した結果をセッション情報として維持できるモジュール
 var passport = require('passport'); //様々なWebサービスとの外部認証を組み込むためのプラットフォームとなるモジュール
 
+// モデルの読み込み
+var User = require('./models/user');
+var Memo = require('./models/memo');
+//Userに対応するテーブルの作成
+User.sync().then(() => {
+  Memo.belongsTo(User, { foreignKey: 'createdBy' }); //メモがユーザーの従属エンティティであり、MemoにおけるcreatedByがUserの外部キーとなることを設定
+  Memo.sync(); //Memoに対応するテーブルを作成
+});
+
 var passport_github2 = require('passport-github2'); //passportがGitHubのOAuth2.0認証を利用するためのモジュール
 var GitHubStrategy = passport_github2.Strategy; //passport-github2モジュールからStrategyオブジェクトを取得
 
@@ -39,7 +48,13 @@ passport.use(
     function (accessToken, refreshToken, profile, done) {
       //process.nextTickで登録する関数は処理に時間がかかるデータベースへの保存する処理を記載
       process.nextTick(function () {
-        return done(null, profile);
+        // Userモデルに対して、取得されたユーザーIDとユーザー名をUserのテーブルに保存
+        User.upsert({
+          userId: profile.id,
+          username: profile.username,
+        }).then(() => {
+          done(null, profile);
+        });
       });
     }
   )
