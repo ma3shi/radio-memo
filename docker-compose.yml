@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   app:
     build: .
@@ -11,9 +11,9 @@ services:
       - db
   db:
     build:
-      context: "."
-      dockerfile: "db.Dockerfile"
+      context: '.'
+      dockerfile: 'db.Dockerfile'
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: schedule_arranger
+      POSTGRES_DB: radio-memo

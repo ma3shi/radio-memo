@@ -80,6 +80,7 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 
 //GitHubのOAuth2.0で認可される権限の範囲(スコープ)を user:email として、認証を行うように設定
+//https://github.com/cfsghost/passport-github
 app.get(
   '/auth/github',
   passport.authenticate('github', { scope: ['user:email'] }),
@@ -87,6 +88,7 @@ app.get(
 );
 
 //GitHub が利用者の許可に対する問い合わせの結果を送るパスの /auth/github/callback のハンドラを登録
+//https://github.com/cfsghost/passport-github
 app.get(
   '/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }), //認証が失敗した際には、再度ログインを促す /login にリダイレクト
