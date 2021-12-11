@@ -18,6 +18,11 @@ block content
           p パーソナリテイ: #{memo.personality}
           p 放送日時: #{memo.airtime}
           p 感想: #{memo.impression}
+          - let isDeletable = (user.id == memo.createdBy)
+          if isDeletable
+            form(method="post" action=`/memos/?delete=1`)
+              input(type="hidden" name="memoId" value=memo.memoId)
+              button(type="submit") 削除
           hr
   else
     div
