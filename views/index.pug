@@ -3,3 +3,22 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  div
+  if user
+      div
+        a(href="/logout") #{user.username} をログアウト
+      div
+        a(href="/memos/new") メモを作る
+      - var hasMemo = memos.length > 0
+      if hasMemo
+        h3 あなたの作ったメモ一覧
+        each memo in memos
+          p No: #{memo.memoId}
+          p 番組名: #{memo.programName}
+          p パーソナリテイ: #{memo.personality}
+          p 放送日時: #{memo.airtime}
+          p 感想: #{memo.impression}
+          hr
+  else
+    div
+      a(href="/login") ログイン

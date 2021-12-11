@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  form(method="post", action="/memos")
+    div
+      h5 番組名
+      input(type="text" name="programName")
+    div
+      h5 パーソナリティ
+      input(type="text" name="personality")
+    div
+      h5 放送日時
+      input(type="text" name="airtime")
+    div
+      h5 感想
+      textarea(name="impression")
+    button(type="submit") メモを登録する

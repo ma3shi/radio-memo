@@ -7,38 +7,38 @@ const Memo = sequelize.define(
     //メモID
     memoId: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true, //主キー
       allowNull: false, // null値を許可しない
     },
     //番組名
     programName: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING, //255 文字までの長さを保存できる設定
       allowNull: false, // null値を許可しない
     },
     //パーソナリティ
     personality: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING, //255 文字までの長さを保存できる設定
       allowNull: false, // null値を許可しない
     },
     //放送日時
     airtime: {
-      type: DataTypes.STRING,
-      allowNull: false, // null値を許可しない
-    },
-    //評価
-    valuation: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING, //255 文字までの長さを保存できる設定
       allowNull: false, // null値を許可しない
     },
     //感想
     impression: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT, //制限のない大きな長い文字列を保存できる設定
       allowNull: false, // null値を許可しない
     },
     //作成者、ユーザーID
     createdBy: {
       type: DataTypes.INTEGER,
       allowNull: false, // null値を許可しない
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
   },
   {

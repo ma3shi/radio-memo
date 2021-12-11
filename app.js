@@ -64,6 +64,7 @@ passport.use(
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
+var memosRouter = require('./routes/memos');
 
 var app = express(); //Applicationオブジェクトをexpressのモジュールを利用して作成し、appという変数に格納
 app.use(helmet()); //appオブジェクトのuse関数(MiddlewareやRouterオブジェクトを登録するための関数)を使ってhelmetを使うように登録する。Middlewareとは、helmetのようなExpressの機能を拡張するモジュールのこと
@@ -93,6 +94,7 @@ app.use(passport.session());
 app.use('/', indexRouter); // /というパスにアクセスされた時routes/index.jsで記述しているRouterオブジェクトを返す
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
+app.use('/memos', memosRouter);
 
 //GitHubのOAuth2.0で認可される権限の範囲(スコープ)を user:email として、認証を行うように設定
 //https://github.com/cfsghost/passport-github
@@ -108,7 +110,7 @@ app.get(
   '/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }), //認証が失敗した際には、再度ログインを促す /login にリダイレクト
   function (req, res) {
-    res.redirect('/'); //認証に成功していた場合は、 / にリダイレクト
+    res.redirect('/'); //認証に成功していた場合は、  index.pugにリダイレクト
   }
 );
 
