@@ -20,9 +20,13 @@ block content
           p 感想: #{memo.impression}
           - let isDeletable = (user.id == memo.createdBy)
           if isDeletable
-            form(method="post" action=`/memos/?delete=1`)
+            form(method="post" action=`/memos/delete`)
               input(type="hidden" name="memoId" value=memo.memoId)
               button(type="submit") 削除
+          - let isEditable = (user.id == memo.createdBy)
+          if isEditable
+            form(method="get" action=`/memos/${memo.memoId}`)
+              button(type="submit") 編集
           hr
   else
     div
