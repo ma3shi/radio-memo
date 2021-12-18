@@ -2,17 +2,20 @@ extends layout
 
 block content
   form(method="post", action="/memos")
-    div
-      h5 番組名
-      input(type="text" name="programName" value=memo.programName)
-      
-    div
-      h5 パーソナリティ
-      input(type="text" name="personality" value=memo.personality)
-    div
-      h5 放送日時
-      input(type="text" name="airtime" value=memo.airtime)
-    div
-      h5 感想
-      textarea(name="impression") #{memo.impression}
-    button(type="submit") メモを変更する
+    div.form-group
+      label(for="programName") 番組名
+      input(type="text" id="programName"  name="programName" value=memo.programName).form-control     
+    div.form-group
+      label(for="personality")  パーソナリティ
+      input(type="text" id="personality"  name="personality" value=memo.personality).form-control
+    div.form-group
+      label(for="airtime") 放送日時
+      input(type="text" id="airtime"  name="airtime" value=memo.airtime).form-control
+    div.form-group
+      label(for="impression") 感想
+      textarea(id="impression"  name="impression").form-control #{memo.impression}
+    button(type="submit").btn.btn-warning メモを変更する
+  script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js")
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js",
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl",
+  crossorigin="anonymous")

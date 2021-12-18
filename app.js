@@ -1,3 +1,5 @@
+'use strict';
+
 var createError = require('http-errors'); //HTTPのエラーを作成するモジュール
 var express = require('express');
 var path = require('path');

@@ -36,11 +36,11 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
 
   Memo.create({
     memoId: Memo.memoId, //id
-    programName: req.body.programName.slice(0, 255) || '（番組名未設定）', //番組名
+    programName: req.body.programName.slice(0, 255) || '（番組名未記入）', //番組名
     personality:
-      req.body.personality.slice(0, 255) || '（パーソナリティ未設定）', //パーソナリティ
-    airtime: req.body.airtime.slice(0, 255) || '（放送時間未設定）', //放送時間
-    impression: req.body.impression, //感想
+      req.body.personality.slice(0, 255) || '（パーソナリティ未記入）', //パーソナリティ
+    airtime: req.body.airtime.slice(0, 255) || '（放送時間未記入）', //放送時間
+    impression: req.body.impression || '（感想未記入）', //感想
     createdBy: req.user.id, //ユーザーid
     updatedAt: updatedAt,
   }).then(memo => {

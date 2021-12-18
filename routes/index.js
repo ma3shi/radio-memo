@@ -6,7 +6,7 @@ const Memo = require('../models/memo');
 /* GET home page. */
 //nextを実行すると次のハンドラ(逐次処理を行っていく関数)が実行される
 router.get('/', function (req, res, next) {
-  const title = 'メモ';
+  const title = 'ラジオ視聴メモ';
   if (req.user) {
     Memo.findAll({
       where: {

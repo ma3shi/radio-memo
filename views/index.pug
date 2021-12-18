@@ -2,32 +2,38 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
   div
   if user
       div
-        a(href="/logout") #{user.username} をログアウト
+        a(href="/logout").btn.btn-info.m-1 #{user.username} をログアウト
       div
-        a(href="/memos/new") メモを作る
+        a(href="/memos/new").btn.btn-primary.m-1 メモを作る
       - var hasMemo = memos.length > 0
       if hasMemo
-        h3 あなたの作ったメモ一覧
         each memo in memos
-          p No: #{memo.memoId}
-          p 番組名: #{memo.programName}
-          p パーソナリテイ: #{memo.personality}
-          p 放送日時: #{memo.airtime}
-          p 感想: #{memo.impression}
-          - let isDeletable = (user.id == memo.createdBy)
-          if isDeletable
-            form(method="post" action=`/memos/delete`)
-              input(type="hidden" name="memoId" value=memo.memoId)
-              button(type="submit") 削除
-          - let isEditable = (user.id == memo.createdBy)
-          if isEditable
-            form(method="get" action=`/memos/${memo.memoId}`)
-              button(type="submit") 編集
-          hr
+          div.card.my-3
+            div.card-header
+              p No: #{memo.memoId}
+              p 番組名: #{memo.programName}
+              p パーソナリテイ: #{memo.personality}
+              p 放送日時: #{memo.airtime}
+            div.card-body 
+              p 感想: #{memo.impression}
+            div.card-footer  
+              - let isDeletable = (user.id == memo.createdBy)
+              if isDeletable
+                form(method="post" action=`/memos/delete`)
+                  input(type="hidden" name="memoId" value=memo.memoId)
+                  button(type="submit").btn.btn-danger.float-right 削除
+              - let isEditable = (user.id == memo.createdBy)
+              if isEditable
+                form(method="get" action=`/memos/${memo.memoId}`)
+                  button(type="submit").btn.btn-warning.float-right.mr-1 編集
+            
   else
-    div
-      a(href="/login") ログイン
+    div.my-3
+      a(href="/login").btn.btn-info.float-left ログイン
+  script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js")
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js",
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl",
+  crossorigin="anonymous")
