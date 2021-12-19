@@ -1,1 +1,1 @@
-PORT=process.env.PORT yarn start
+yarn start
