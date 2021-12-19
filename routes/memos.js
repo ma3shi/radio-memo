@@ -12,10 +12,16 @@ router.get('/new', authenticationEnsurer, (req, res, next) => {
 
 //変更画面へ
 router.get('/:memoId', authenticationEnsurer, (req, res, next) => {
-  Memo.findByPk(req.params.memoId).then(memo => {
-    console.log(memo);
-    res.render('edit', { user: req.user, memo: memo });
-  });
+  Memo.findByPk(req.params.memoId)
+    .then(memo => {
+      var memoEdit = memo;
+    })
+    .then(() => {
+      memo.destroy();
+    })
+    .then(() => {
+      res.render('edit', { user: req.user, memo: memoEdit });
+    });
 });
 
 //削除処理
