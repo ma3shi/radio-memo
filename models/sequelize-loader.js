@@ -1,6 +1,5 @@
 'use strict';
 
-//https://sequelize.org/master/index.html
 const { Sequelize, DataTypes } = require('sequelize');
 
 const dialectOptions = {
