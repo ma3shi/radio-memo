@@ -1,1 +1,1 @@
-PORT=8000 yarn start
+PORT=process.env.PORT yarn start
