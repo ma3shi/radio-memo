@@ -1,0 +1,7 @@
+{
+  "name": "radio-memo",
+  "description": "ラジオ聴取メモ",
+  "logo": "",
+  "keywords": ["node"],
+  "image": "heroku/nodejs"
+}
